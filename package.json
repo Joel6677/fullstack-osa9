@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts-node": "ts-node",
-    "calculateBmi": "ts-node bmiCalculator.ts"
+    "calculateBmi": "ts-node bmiCalculator.ts",
+    "calculateResult": "ts-node exerciseCalculator.ts"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
     "@types/node": "^14.6.3",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "apollo-link-context": "^1.0.20"
   }
 }
