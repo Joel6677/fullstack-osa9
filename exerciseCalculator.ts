@@ -1,6 +1,3 @@
-import { ClientRequestArgs } from "http";
-import { DH_NOT_SUITABLE_GENERATOR } from "constants";
-
 interface Result {
     periodLength: number;
     trainingDays: number;
@@ -16,24 +13,42 @@ interface Result {
     dailyExerciseHours: Array<number>;
   }
 
+//   const parseDailyHoursAndTarget = (args: Array<string>): DailyHoursAndTarget => {
+//     console.log(args)
+//     if (args.length < 4) throw new Error('Not enough arguments');
+    
+//     let tempArr: Array<number> = []
+
+//     let testi = args[2].replace(/[^0-9\.]+/g," ").split(" ")
+
+//     for (let i = 0; i < testi.length; i++) {
+//         if( !isNaN(Number(testi[i])) && testi[i] !== '') {
+//             console.log('testi: ', testi[i])
+//             tempArr.push(Number(testi[i]))
+//         }
+//     }
+    
+//     return {
+//       target: Number(args[3]),
+//       dailyExerciseHours: tempArr,
+//     };
+//   };
+
   const parseDailyHoursAndTarget = (args: Array<string>): DailyHoursAndTarget => {
-    console.log(args)
+
     if (args.length < 4) throw new Error('Not enough arguments');
     
     let tempArr: Array<number> = []
 
-    let testi = args[2].replace(/[^0-9\.]+/g," ").split(" ")
+      for (let i = 1; i < args.length; i++) {
+          if (!isNaN(Number(args[i]))) {
+              tempArr.push(Number(args[i]))
+          } 
+      }
 
-    for (let i = 0; i < testi.length; i++) {
-        if( !isNaN(Number(testi[i])) && testi[i] !== '') {
-            console.log('testi: ', testi[i])
-            tempArr.push(Number(testi[i]))
-        }
-    }
-    
     return {
-      target: Number(args[3]),
-      dailyExerciseHours: tempArr,
+      target: tempArr[0],
+      dailyExerciseHours: tempArr.splice(1,tempArr.length)
     };
   };
   
@@ -43,7 +58,6 @@ interface Result {
     dailyExerciseHours.forEach(hours => {
         if (hours > 0) {
             trainingDays++
-            console.log(trainingDays)
         }
     })
 
@@ -69,7 +83,6 @@ interface Result {
     } else {
         rating = 1
         ratingDescription = 'better than nothing'
-
     }
 
     return {
