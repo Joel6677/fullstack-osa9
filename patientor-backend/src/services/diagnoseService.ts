@@ -7,5 +7,8 @@ const getEntries = (): Array<Diagnose> => {
     return diagnoses;
 }
 
+const addEntry = () => {
+    return null;
+  };
 
-export default { getEntries };
+export default { getEntries, addEntry };
